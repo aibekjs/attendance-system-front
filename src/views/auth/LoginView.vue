@@ -14,11 +14,11 @@
         <label for="password" class="block text-900 font-bold ml-3 mb-2">Password</label>
         <input type="text" id="password" class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl">
         
-        <router-link :to="{ name: 'forgot-password' }" class="bg-pink-200 text-900 text-xs font-bold no-underline p-2 border-round-3xl">Forgot Password?</router-link>
+        <router-link :to="{ name: 'forgot-password' }" class="bg-pink-200 text-900 text-xs font-bold no-underline py-2 px-3 border-round-3xl">Forgot Password?</router-link>
         
-        <hr class="mt-4">
+        <hr class="mt-3">
 
-        <div class="flex justify-content-between my-5">
+        <div class="flex justify-content-between my-3">
           <div>
             <primary-button :button-text="btnLoginLabel" :button-bg-color="btnLoginBgColor"></primary-button>
           </div>
