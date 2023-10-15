@@ -20,10 +20,13 @@
 
         <div class="flex justify-content-between my-3">
           <div>
-            <primary-button :button-text="btnLoginLabel" :button-bg-color="btnLoginBgColor"></primary-button>
+            <primary-button :button-text="btnLoginLabel" :button-bg-color="btnActive"></primary-button>
           </div>
           <div>
-            <primary-button :button-text="btnRegistrationLabel"></primary-button>
+            <router-link :to="{ name: 'register' }" class="no-underline">
+              <primary-button :button-text="btnRegisterLabel">
+              </primary-button>
+            </router-link>  
           </div>
         </div>
       </div>
@@ -41,8 +44,8 @@ export default {
     return {
       btnWelcomeLabel: "Welcome",
       btnLoginLabel: "Login",
-      btnRegistrationLabel: "Registration",
-      btnLoginBgColor: "#1976d2" 
+      btnRegisterLabel: "Register",
+      btnActive: "#1976d2" 
     };
   },
 };

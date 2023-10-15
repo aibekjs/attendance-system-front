@@ -28,7 +28,10 @@
                 </router-link>
             </div>
             <div>
-                <primary-button :button-text="btnRegistrationLabel"></primary-button>
+                <router-link :to="{ name: 'register' }" class="no-underline">
+                    <primary-button :button-text="btnRegistrationLabel">
+                    </primary-button>
+                </router-link>  
             </div>
           </div>
         </div>
