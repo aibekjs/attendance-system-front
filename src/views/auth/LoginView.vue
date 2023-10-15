@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PrimaryButton from "./PrimaryButton.vue";
+import PrimaryButton from "@/components/PrimaryButton.vue";
 export default {
   components: {
     PrimaryButton,
@@ -13,4 +13,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
