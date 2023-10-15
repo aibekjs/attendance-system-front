@@ -9,9 +9,9 @@ import "primeflex/primeflex.css";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTelegram, faWhatsapp, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
+import { faSquareCheck, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faTelegram, faWhatsapp, faInstagram, faSquareCheck);
+library.add(faTelegram, faWhatsapp, faInstagram, faSquareCheck, faGraduationCap);
 
 const app = createApp(App);
 
