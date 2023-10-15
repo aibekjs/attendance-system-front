@@ -1,14 +1,16 @@
 <template>
-  <authentification-layout></authentification-layout>
+  <div class="auth-layout">
+    <auth-layout></auth-layout>
+  </div>
 </template>
 
 <script>
-import AuthentificationLayout from './layouts/AuthentificationLayout';
+import AuthLayout from './layouts/AuthLayout';
 
 export default {
   name: 'App',
   components: {
-    AuthentificationLayout
+    AuthLayout
   }
 }
 </script>
