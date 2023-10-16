@@ -8,10 +8,10 @@
           <primary-button :button-text="btnWelcomeLabel"></primary-button>
         </div>
         <div class="surface-300 px-8 py-3 border-round-bottom-3xl">
-          <label for="email" class="block text-900 font-bold ml-3 mb-2">Email</label>
+          <label for="email" class="block text-900 font-bold ml-3 mb-1">Email</label>
           <input type="text" id="email" class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl">
           
-          <label for="password" class="block text-900 font-bold ml-3 mb-2">Password</label>
+          <label for="password" class="block text-900 font-bold ml-3 mb-1">Password</label>
           <input type="text" id="password" class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl">
 
           <input type="text" placeholder="Enter the code" class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl">

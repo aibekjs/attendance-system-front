@@ -17,7 +17,7 @@ export default {
     },
     buttonBgColor: {
       type: String,
-      default: "#d32f2f"
+      default: "#b71c1c"
     }
   },
 }

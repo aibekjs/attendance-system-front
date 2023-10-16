@@ -19,6 +19,6 @@ export default {
 .auth-layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the container takes the full viewport height */
+  min-height: 100vh; 
 }
 </style>

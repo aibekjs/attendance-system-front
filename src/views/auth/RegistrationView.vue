@@ -10,11 +10,11 @@
           </div>
           <div class="lg:flex justify-content-between">
             <div class="lg:w-5">
-                <label for="email" class="block text-900 font-bold ml-3 mb-2">Email</label>
+                <label for="email" class="block text-900 font-bold ml-3 mb-1">Email</label>
                 <input type="text" id="email" class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl">
             </div>
             <div class="lg:w-5">
-                <label for="password" class="block text-900 font-bold ml-3 mb-2">Password</label>
+                <label for="password" class="block text-900 font-bold ml-3 mb-1">Password</label>
                 <input type="text" id="password" class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl">
             </div>
           </div>
@@ -48,7 +48,7 @@
         btnRegistrationLabel: "Registration",
         btnLoginLabel: "Login",
         btnRegisterLabel: "Register",
-        btnActive: "#1976d2" 
+        btnActive: "#0d47a1" 
       };
     },
   };

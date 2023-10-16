@@ -6,10 +6,12 @@ import ForgotPassword from '../views/auth/ForgotPassword.vue';
 import ResetPassword from '../views/auth/ResetPassword.vue';
 import RegistrationView from '../views/auth/RegistrationView.vue';
 
+import Main from '../layouts/MainLayout.vue' 
+
 const routes = [
   {
-    path: '/',
-    name: 'Auth',
+    path: '/auth',
+    name: 'auth',
     component: Auth,
     children: [
         {
@@ -34,6 +36,11 @@ const routes = [
         },
       ],
   },
+  {
+    path: '/',
+    name: 'main',
+    component: Main,
+  }
   // Additional routes for your application
 ];
 
