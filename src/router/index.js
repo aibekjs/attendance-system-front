@@ -6,8 +6,10 @@ import ForgotPassword from '../views/auth/ForgotPassword.vue';
 import ResetPassword from '../views/auth/ResetPassword.vue'; 
 import RegistrationView from '../views/auth/RegistrationView.vue'; 
 import AttendanceApp from '../layouts/AttendanceApp.vue' 
+import AppLogin from '../views/attendance-app/AppLogin.vue'
 import ByCode from '../views/attendance-app/ByCode.vue' 
 import AnotherOption from '../views/attendance-app/AnotherOption.vue' 
+import SuccessPage from '../views/attendance-app/SuccessPage.vue'
  
 import Main from '../layouts/MainLayout.vue'  
  
@@ -50,6 +52,11 @@ const routes = [
     component: AttendanceApp, 
     children: [ 
       { 
+        path: 'app-login', 
+        name: 'applogin', 
+        component: AppLogin, 
+      }, 
+      { 
         path: 'by-code', 
         name: 'bycode', 
         component: ByCode, 
@@ -58,6 +65,11 @@ const routes = [
         path: 'another-option', 
         name: 'anotheroption', 
         component: AnotherOption, 
+      }, 
+      { 
+        path: 'success-page', 
+        name: 'successpage', 
+        component: SuccessPage, 
       }, 
     ], 
   } 

@@ -22,6 +22,7 @@ import {
   faAddressCard,
   faGear,
   faLockOpen,
+  faThumbsUp
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -34,7 +35,8 @@ library.add(
   faClipboardUser,
   faAddressCard,
   faGear,
-  faLockOpen
+  faLockOpen,
+  faThumbsUp
 );
 
 const app = createApp(App);
