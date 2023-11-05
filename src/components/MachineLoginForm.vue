@@ -12,7 +12,7 @@
         <input type="text" :placeholder="placeholder" class="w-full mb-4 py-2 pl-3 outline-none border-0 border-round-3xl"> 
     </div>
     <div class="col-12 lg:col-3">
-        <router-link :to="{ name: 'applogin' }">
+        <router-link :to="{ name: 'machinelogin' }">
             <img :src="require('@/assets/machine-back.png')" alt="back" class="w-full">
         </router-link>
     </div>

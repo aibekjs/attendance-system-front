@@ -5,11 +5,11 @@ import Login from '../views/auth/LoginView.vue';
 import ForgotPassword from '../views/auth/ForgotPassword.vue'; 
 import ResetPassword from '../views/auth/ResetPassword.vue'; 
 import RegistrationView from '../views/auth/RegistrationView.vue'; 
-import AttendanceApp from '../layouts/AttendanceApp.vue' 
-import AppLogin from '../views/attendance-app/AppLogin.vue'
-import ByCode from '../views/attendance-app/ByCode.vue' 
-import AnotherOption from '../views/attendance-app/AnotherOption.vue' 
-import SuccessPage from '../views/attendance-app/SuccessPage.vue'
+import AttendanceMachine from '../layouts/AttendanceMachine.vue' 
+import MachineLogin from '../views/attendance-machine/MachineLogin.vue'
+import ByCode from '../views/attendance-machine/ByCode.vue' 
+import AnotherOption from '../views/attendance-machine/AnotherOption.vue' 
+import SuccessPage from '../views/attendance-machine/SuccessPage.vue'
  
 import Main from '../layouts/MainLayout.vue'  
  
@@ -47,14 +47,14 @@ const routes = [
     component: Main, 
   }, 
   { 
-    path: '/attendance-app', 
-    name: 'attendanceapp', 
-    component: AttendanceApp, 
+    path: '/attendance-machine', 
+    name: 'attendancemachine', 
+    component: AttendanceMachine, 
     children: [ 
       { 
-        path: 'app-login', 
-        name: 'applogin', 
-        component: AppLogin, 
+        path: 'machine-login', 
+        name: 'machinelogin', 
+        component: MachineLogin, 
       }, 
       { 
         path: 'by-code', 

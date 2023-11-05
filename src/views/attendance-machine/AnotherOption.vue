@@ -1,12 +1,12 @@
 <template> 
-    <machine-login :header="header" :placeholder="placeholder" />
+    <machine-login-form :header="header" :placeholder="placeholder" />
   </template> 
    
   <script> 
-  import MachineLogin from "@/components/MachineLogin.vue"; 
+  import MachineLoginForm from "@/components/MachineLoginForm.vue"; 
   export default { 
     components: { 
-      MachineLogin, 
+      MachineLoginForm, 
     }, 
     data() { 
       return { 

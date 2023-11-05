@@ -2,23 +2,23 @@
     <div class="px-4 md:px-6 lg:px-8" style="margin-top: 150px;"> 
         <div class="grid"> 
             <router-link :to="{ name: 'login' }" class="col-12 md:col-6 lg:col-4 no-underline">
-                <login-method :icon="icon1" :text="text1" />
+                <machine-login-card :icon="icon1" :text="text1" />
             </router-link>
             <router-link :to="{ name: 'bycode' }" class="col-12 md:col-6 lg:col-4 no-underline">
-                <login-method :icon="icon2" :text="text2" />
+                <machine-login-card :icon="icon2" :text="text2" />
             </router-link>
             <router-link :to="{ name: 'anotheroption' }" class="col-12 md:col-6 lg:col-4 no-underline">
-                <login-method :icon="icon3" :text="text3" />
+                <machine-login-card :icon="icon3" :text="text3" />
             </router-link>
         </div> 
     </div> 
 </template> 
 
 <script>
-    import LoginMethod from "@/components/LoginMethod"
+    import MachineLoginCard from "@/components/MachineLoginCard"
     export default {
         components: {
-            LoginMethod,
+            MachineLoginCard,
         },
         data() {
             return {
