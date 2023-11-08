@@ -15,7 +15,6 @@ export default {
     text: {
       type: String,
       required: true,
-      default: "Yamate"
     },
     icon: {
       type: Array,

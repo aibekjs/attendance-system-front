@@ -7,6 +7,7 @@ import ResetPassword from '../views/auth/ResetPassword.vue';
 import RegistrationView from '../views/auth/RegistrationView.vue'; 
 import AttendanceMachine from '../layouts/AttendanceMachine.vue' 
 import MachineLogin from '../views/attendance-machine/MachineLogin.vue'
+import ById from '../views/attendance-machine/ById.vue' 
 import ByCode from '../views/attendance-machine/ByCode.vue' 
 import AnotherOption from '../views/attendance-machine/AnotherOption.vue' 
 import SuccessPage from '../views/attendance-machine/SuccessPage.vue'
@@ -55,6 +56,11 @@ const routes = [
         path: 'machine-login', 
         name: 'machinelogin', 
         component: MachineLogin, 
+      }, 
+      { 
+        path: 'by-id', 
+        name: 'byid', 
+        component: ById, 
       }, 
       { 
         path: 'by-code', 

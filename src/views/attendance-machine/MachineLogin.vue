@@ -1,7 +1,7 @@
 <template> 
     <div class="px-4 md:px-6 lg:px-8" style="margin-top: 150px;"> 
         <div class="grid"> 
-            <router-link :to="{ name: 'login' }" class="col-12 md:col-6 lg:col-4 no-underline">
+            <router-link :to="{ name: 'byid' }" class="col-12 md:col-6 lg:col-4 no-underline">
                 <machine-login-card :icon="icon1" :text="text1" />
             </router-link>
             <router-link :to="{ name: 'bycode' }" class="col-12 md:col-6 lg:col-4 no-underline">
