@@ -18,8 +18,10 @@
           type="text"
           id="email"
           v-model="username"
-          class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl"
+          :class="{ 'error-border': usernameError || usernameRequired}"
+          class="w-full mb-3 py-2 pl-3 outline-none border-round-3xl"
         />
+        <div v-if="usernameRequired" :class="'error-text ml-3 mb-3'">{{ usernameRequired }}</div>
 
         <label for="password" class="block text-900 font-bold ml-3 mb-1"
           >Password</label
@@ -28,15 +30,11 @@
           type="password"
           id="password"
           v-model="password"
-          class="w-full mb-3 py-2 pl-3 outline-none border-0 border-round-3xl"
+          :class="{ 'error-border': passwordError }"
+          class="w-full mb-3 py-2 pl-3 outline-none border-round-3xl"
         />
-
-        <router-link
-          :to="{ name: 'forgot-password' }"
-          class="bg-pink-200 text-900 text-xs font-bold no-underline py-2 px-3 border-round-3xl"
-          >Forgot Password?</router-link
-        >
-
+        <div v-if="passwordError" :class="'error-text ml-3 mb-3'">{{ passwordError }}</div>
+        
         <hr class="mt-3" />
 
         <div class="flex justify-content-between my-3">
@@ -60,7 +58,7 @@
 
 <script>
 import PrimaryButton from "@/components/PrimaryButton.vue";
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   components: {
@@ -72,27 +70,53 @@ export default {
       btnLoginLabel: "Login",
       btnRegisterLabel: "Register",
       btnActive: "#0d47a1",
-      email: "",
-      password: "",
+      username: '',
+      password: '',
+      usernameError: '', 
+      usernameRequired: '',
+      passwordError: '',
     };
   },
   methods: {
     async login() {
-      try {
-        const response = await axios.post(
-          "http://172.16.8.185:8000/api/login",
-          {
-            email: this.email,
-            password: this.password,
-          }
-        );
-        console.log(response.data.access_token);
-        this.$router.push({ name: "main" });
-      } catch (error) {
-        console.log(error);
-        alert("Ошибка аутентификации");
+      if (!this.username) {
+        this.usernameRequired = "Email is required!";
       }
-    },
+
+      if (!this.password) {
+        this.passwordError = "Password is required!";
+      }
+
+      if (!this.passwordError && !this.usernameRequired) {
+        try {
+          const response = await axios.post('http://172.16.4.81:8000/api/login', {
+            email: this.username,
+            password: this.password
+          });
+          
+          if (response.data.status === 200) {
+            console.log(response.data.access_token);
+            this.$router.push({ name: 'main' });
+          }
+        } catch (error) {
+          console.error(error.email);
+          this.usernameError = " ";
+          this.passwordError = "Incorrect password or login!";
+
+          this.username = "";
+          this.password = ""; 
+        }
+      }
+    }
   },
 };
 </script>
+
+<style>
+.error-text {
+  color: red;
+}
+.error-border {
+  border: 1px solid red; 
+}
+</style>
