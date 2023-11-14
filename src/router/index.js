@@ -2,9 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
  
 import Auth from '../layouts/AuthLayout.vue'; 
 import Login from '../views/auth/LoginView.vue'; 
-import ForgotPassword from '../views/auth/ForgotPassword.vue'; 
-import ResetPassword from '../views/auth/ResetPassword.vue'; 
-import RegistrationView from '../views/auth/RegistrationView.vue'; 
 import AttendanceMachine from '../layouts/AttendanceMachine.vue' 
 import MachineLogin from '../views/attendance-machine/MachineLogin.vue'
 import ById from '../views/attendance-machine/ById.vue' 
@@ -24,21 +21,6 @@ const routes = [
           path: 'login', 
           name: 'login', 
           component: Login, 
-        }, 
-        { 
-          path: 'forgot-password', 
-          name: 'forgot-password', 
-          component: ForgotPassword, 
-        }, 
-        { 
-          path: 'reset-password', 
-          name: 'reset-password', 
-          component: ResetPassword, 
-        }, 
-        { 
-          path: 'register', 
-          name: 'register', 
-          component: RegistrationView, 
         }, 
       ], 
   }, 

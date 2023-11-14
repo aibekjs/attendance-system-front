@@ -37,18 +37,13 @@
         
         <hr class="mt-3" />
 
-        <div class="flex justify-content-between my-3">
+        <div class="text-center my-3">
           <div>
             <primary-button
               :button-text="btnLoginLabel"
               :button-bg-color="btnActive"
               @click="login"
             ></primary-button>
-          </div>
-          <div>
-            <router-link :to="{ name: 'register' }" class="no-underline">
-              <primary-button :button-text="btnRegisterLabel"></primary-button>
-            </router-link>
           </div>
         </div>
       </div>
