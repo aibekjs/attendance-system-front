@@ -85,6 +85,9 @@
                     </div>
                 </div>
             </div>
+            <div class="w-full text-center">
+                <Button type="button" label="Download" icon="pi pi-download" severity="help" class="bg-pink-300 text-900" />
+            </div>
         </div>
     </div>
 </template>
