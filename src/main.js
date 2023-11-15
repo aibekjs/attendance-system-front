@@ -39,16 +39,18 @@ library.add(
   faThumbsUp
 );
 
-const app = createApp(App);
 
 import Ripple from "primevue/ripple";
-
-app.directive("ripple", Ripple);
-
 import StyleClass from "primevue/styleclass";
+import Dropdown from 'primevue/dropdown';
+import Button from 'primevue/button';
 
-app.directive("styleclass", StyleClass);
-
-app.component("font-awesome-icon", FontAwesomeIcon);
-app.use(router, PrimeVue, { ripple: true });
-app.mount("#app");
+createApp(App)
+  .use(router)
+  .use(PrimeVue, { ripple: true })
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .component("Dropdown", Dropdown)
+  .component("Button", Button)
+  .directive("ripple", Ripple)
+  .directive("styleclass", StyleClass)
+  .mount("#app");

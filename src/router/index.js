@@ -8,6 +8,7 @@ import ById from '../views/attendance-machine/ById.vue'
 import ByCode from '../views/attendance-machine/ByCode.vue' 
 import AnotherOption from '../views/attendance-machine/AnotherOption.vue' 
 import SuccessPage from '../views/attendance-machine/SuccessPage.vue'
+import MyAttendance from '../views/main/MyAttendance.vue'
  
 import Main from '../layouts/MainLayout.vue'  
  
@@ -17,17 +18,24 @@ const routes = [
     name: 'auth', 
     component: Auth, 
     children: [ 
-        { 
-          path: 'login', 
-          name: 'login', 
-          component: Login, 
-        }, 
-      ], 
+      { 
+        path: 'login', 
+        name: 'login', 
+        component: Login, 
+      }, 
+    ], 
   }, 
   { 
     path: '/', 
     name: 'main', 
     component: Main, 
+    children: [ 
+      { 
+        path: 'my-attendance', 
+        name: 'myattendance', 
+        component: MyAttendance, 
+      }, 
+    ],
   }, 
   { 
     path: '/attendance-machine', 
