@@ -30,9 +30,9 @@
                             <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
                                 transition-duration-150 transition-colors p-ripple">
                                 <span class="text-center" style="width: 30px;">
-                                    <font-awesome-icon :icon="['fas', 'right-to-bracket']" size="lg" />
+                                    <font-awesome-icon :icon="['fas', 'right-from-bracket']" size="xl" />
                                 </span>
-                                <span class="font-bold">Login</span>
+                                <span class="font-bold">Logout</span>
                             </a>
                         </router-link>
                     </li>

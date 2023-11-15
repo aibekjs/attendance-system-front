@@ -8,32 +8,45 @@ import ById from '../views/attendance-machine/ById.vue'
 import ByCode from '../views/attendance-machine/ByCode.vue' 
 import AnotherOption from '../views/attendance-machine/AnotherOption.vue' 
 import SuccessPage from '../views/attendance-machine/SuccessPage.vue'
-import MyAttendance from '../views/main/MyAttendance.vue'
- 
-import Main from '../layouts/MainLayout.vue'  
- 
+import StudentDashboard from '../layouts/StudentDashboard.vue'  
+import MyAttendanceReport from '../views/dashboard/student/MyAttendanceReport'
+import TeacherDashboard from '../layouts/TeacherDashboard.vue'
+import StudentAttendanceReport from '../views/dashboard/teacher/StudentAttendanceReport.vue'
+
 const routes = [ 
   { 
-    path: '/auth', 
+    path: '/', 
     name: 'auth', 
     component: Auth, 
     children: [ 
       { 
-        path: 'login', 
+        path: '', 
         name: 'login', 
         component: Login, 
       }, 
     ], 
   }, 
   { 
-    path: '/', 
-    name: 'main', 
-    component: Main, 
+    path: '/student-dashboard', 
+    name: 'student_dashboard', 
+    component: StudentDashboard, 
     children: [ 
       { 
-        path: 'my-attendance', 
-        name: 'myattendance', 
-        component: MyAttendance, 
+        path: 'my-attendance-report', 
+        name: 'my_attendance_report', 
+        component: MyAttendanceReport, 
+      }, 
+    ],
+  }, 
+  { 
+    path: '/teacher-dashboard', 
+    name: 'teacher_dashboard', 
+    component: TeacherDashboard, 
+    children: [ 
+      { 
+        path: 'student-attendance-report', 
+        name: 'student_attendance_report', 
+        component: StudentAttendanceReport, 
       }, 
     ],
   }, 

@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faGraduationCap,
-  faRightToBracket,
+  faRightFromBracket,
   faUserGroup,
   faClipboardUser,
   faAddressCard,
@@ -30,7 +30,7 @@ library.add(
   faWhatsapp,
   faInstagram,
   faGraduationCap,
-  faRightToBracket,
+  faRightFromBracket,
   faUserGroup,
   faClipboardUser,
   faAddressCard,

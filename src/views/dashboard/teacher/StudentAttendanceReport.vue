@@ -14,7 +14,7 @@
     </div>
     <div class="p-4">
         <div class="surface-card border-round border-round-3xl p-4" style="min-height: 30rem">
-            <div class="bg-pink-300 w-3 m-auto p-2 flex justify-content-between">
+            <div class="bg-pink-300 w-4 m-auto p-2 flex justify-content-between">
                 <div class="flex align-items-center">
                     <div class="bg-green-700" style="width: 25px; height: 25px"></div> 
                     <div class="font-bold ml-1">Card</div>
@@ -27,31 +27,31 @@
                     <div class="bg-pink-700" style="width: 25px; height: 25px"></div> 
                     <div class="font-bold ml-1">Friend</div>
                 </div>
+                <div class="flex align-items-center">
+                    <div class="bg-black-alpha-90" style="width: 25px; height: 25px"></div> 
+                    <div class="font-bold ml-1">Absent</div>
+                </div>
             </div>
             <div class="bg-black-alpha-90 my-3" style="min-height: 0.5rem"></div>
             <div class="grid">
                 <div class="col-12 md:col-6">
                     <div class="font-bold text-2xl text-center">Lecture</div>
-                    <div class="bg-pink-300 border-round border-round-3xl m-4 p-4" style="min-height: 15rem">
+                    <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="bg-red-700">Student</th>
-                                    <th class="bg-yellow-700">ID</th>
-                                    <th class="bg-yellow-700" v-for="(item, index) in LectureStudents[0].report" :key="index">
+                                    <th class="bg-yellow-500">Student</th>
+                                    <th class="bg-yellow-500">ID</th>
+                                    <th class="bg-yellow-500" v-for="(item, index) in LectureStudents[0].report" :key="index">
                                         {{ item.day }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="student in LectureStudents" :key="student.id">
-                                    <td class="bg-red-700">{{ student.student }}</td>
+                                    <td class="pl-2">{{ student.student }}</td>
                                     <td class="text-center">{{ student.id }}</td>
-                                    <td v-for="reportItem in student.report" :key="reportItem.day">
-                                        <div v-if="reportItem.type === 'card'" class="color-box bg-green-700"></div>
-                                        <div v-else-if="reportItem.type === 'code'" class="color-box bg-blue-700"></div>
-                                        <div v-else-if="reportItem.type === 'friend'" class="color-box bg-pink-700"></div>
-                                    </td>
+                                    <td v-for="reportItem in student.report" :key="reportItem.day" :class="getBackgroundColorClass(reportItem.type)" style="width: 45px; height: 45px"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -59,26 +59,22 @@
                 </div>
                 <div class="col-12 md:col-6">
                     <div class="font-bold text-2xl text-center">Practice</div>
-                    <div class="bg-pink-300 border-round border-round-3xl m-4 p-4" style="min-height: 15rem">
+                    <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="bg-red-700">Student</th>
-                                    <th class="bg-yellow-700">ID</th>
-                                    <th class="bg-yellow-700" v-for="(item, index) in PracticeStudents[0].report" :key="index">
+                                    <th class="bg-red-500">Student</th>
+                                    <th class="bg-red-500">ID</th>
+                                    <th class="bg-red-500" v-for="(item, index) in PracticeStudents[0].report" :key="index">
                                         {{ item.day }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="student in PracticeStudents" :key="student.id">
-                                    <td class="bg-red-700">{{ student.student }}</td>
+                                    <td class="pl-2">{{ student.student }}</td>
                                     <td class="text-center">{{ student.id }}</td>
-                                    <td v-for="reportItem in student.report" :key="reportItem.day">
-                                        <div v-if="reportItem.type === 'card'" class="color-box bg-green-700"></div>
-                                        <div v-else-if="reportItem.type === 'code'" class="color-box bg-blue-700"></div>
-                                        <div v-else-if="reportItem.type === 'friend'" class="color-box bg-pink-700"></div>
-                                    </td>
+                                    <td v-for="reportItem in student.report" :key="reportItem.day"  :class="getBackgroundColorClass(reportItem.type)" style="width: 45px; height: 45px"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -139,7 +135,7 @@ const LectureStudents = ref([
         student: 'Serikbay Aibek', 
         id: 38545, 
         report: [
-            { day: 2, type: 'code' }, 
+            { day: 2, type: 'absent' }, 
             { day: 9, type: 'card' },
             { day: 16, type: 'card' },
             { day: 21, type: 'friend' },
@@ -153,7 +149,7 @@ const LectureStudents = ref([
             { day: 2, type: 'card' }, 
             { day: 9, type: 'card' },
             { day: 16, type: 'card' },
-            { day: 21, type: 'friend' },
+            { day: 21, type: 'absent' },
             { day: 28, type: 'friend' }
         ]
     },
@@ -166,9 +162,9 @@ const PracticeStudents = ref([
         report: [
             { day: 2, type: 'card' }, 
             { day: 9, type: 'card' },
-            { day: 16, type: 'card' },
+            { day: 16, type: 'absent' },
             { day: 21, type: 'card' },
-            { day: 28, type: 'card' }
+            { day: 28, type: 'card' },
         ]
     },
     {
@@ -179,10 +175,25 @@ const PracticeStudents = ref([
             { day: 9, type: 'code' },
             { day: 16, type: 'card' },
             { day: 21, type: 'friend' },
-            { day: 28, type: 'card' }
+            { day: 28, type: 'card' },
         ]
     },
 ]);
+
+const getBackgroundColorClass = (type) => {
+  switch (type) {
+    case 'card':
+      return 'bg-green-700';
+    case 'code':
+      return 'bg-blue-700';
+    case 'friend':
+      return 'bg-pink-700';
+    case 'absent':
+      return 'bg-black-alpha-90';
+    default:
+      return '';
+  }
+};
 </script>
 
 <style>
