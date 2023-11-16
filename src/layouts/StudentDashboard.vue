@@ -1,5 +1,5 @@
 <template>
-<div class="min-h-screen flex relative lg:static bg-pink-200">
+<div class="min-h-screen flex fixed lg:static bg-pink-200">
     <div id="app-sidebar-2" class="bg-red-900 h-screen hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 select-none" style="width:280px">
         <div class="flex flex-column h-full">
             <div class="flex align-items-center px-5 flex-shrink-0" style="height:60px">
@@ -8,13 +8,15 @@
             <div class="overflow-y-auto bg-white h-full" style="width: 250px;">
                 <ul class="list-none p-3 m-0">
                     <li>
-                        <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
-                            transition-duration-150 transition-colors p-ripple">
-                            <span class="text-center" style="width: 30px;">
-                                <font-awesome-icon :icon="['fas', 'clipboard-user']" size="xl" />
-                            </span>
-                            <span class="font-bold">My attendance</span>
-                        </a>
+                        <router-link :to="{ path: '/student-dashboard/my-attendance-report' }" class="no-underline">
+                            <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
+                                transition-duration-150 transition-colors p-ripple">
+                                <span class="text-center" style="width: 30px;">
+                                    <font-awesome-icon :icon="['fas', 'clipboard-user']" size="xl" />
+                                </span>
+                                <span class="font-bold">My attendance</span>
+                            </a>
+                        </router-link>
                     </li>
                     <li>
                         <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
@@ -26,7 +28,7 @@
                         </a>
                     </li>
                     <li>
-                        <router-link :to="{ path: '/auth/login' }" class="no-underline">
+                        <router-link :to="{ path: '/' }" class="no-underline">
                             <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
                                 transition-duration-150 transition-colors p-ripple">
                                 <span class="text-center" style="width: 30px;">
@@ -37,6 +39,13 @@
                         </router-link>
                     </li>
                 </ul>
+            </div>
+            <div class="mt-auto bg-white" style="width: 250px;">
+                <hr class="mb-3 mx-3 border-top-1 border-none surface-border" />
+                <div class="m-3 flex align-items-center p-2">
+                    <img :src="username[0].photo" class="mr-2 border-circle" style="width: 30px; height: 30px"/>
+                    <span class="font-medium text-700">{{ username[0].name }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -53,3 +62,11 @@
     </div>
 </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+
+const username = ref([ 
+    {photo: 'https://frankfurt.apollo.olxcdn.com/v1/files/r3xsf4z97vnv3-KZ/image;s=1080x1071', name: 'Maratuly Kadyr'},
+]);
+</script>

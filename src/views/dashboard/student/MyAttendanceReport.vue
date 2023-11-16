@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="p-4">
-        <div class="surface-card border-round border-round-3xl p-4" style="min-height: 30rem">
+        <div class="surface-card border-round border-round-3xl p-4">
             <div class="bg-pink-300 w-4 m-auto p-2 flex justify-content-between">
                 <div class="flex align-items-center">
                     <div class="bg-green-700" style="width: 25px; height: 25px"></div> 

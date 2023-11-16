@@ -91,7 +91,7 @@ export default {
           
           if (response.data.status === 200) {
             console.log(response.data.access_token);
-            this.$router.push({ name: 'main' });
+            this.$router.push({ path: 'student-dashboard/my-attendance-report' });
           }
         } catch (error) {
           console.error(error.email);
