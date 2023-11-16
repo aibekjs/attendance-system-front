@@ -40,16 +40,14 @@
                             <thead>
                                 <tr>
                                     <th class="bg-yellow-500">Coursename</th>
-                                    <th class="bg-yellow-500">Code</th>
                                     <th class="bg-yellow-500" v-for="(item, index) in lecture[0].report" :key="index">
                                         {{ item.day }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="coursename in lecture" :key="coursename.course_code">
+                                <tr v-for="coursename in lecture" :key="coursename.id">
                                     <td class="pl-2">{{ coursename.coursename }}</td>
-                                    <td class="text-center">{{ coursename.course_code }}</td>
                                     <td v-for="reportItem in coursename.report" :key="reportItem.day" :class="getBackgroundColorClass(reportItem.type)" style="width: 45px; height: 45px"></td>
                                 </tr>
                             </tbody>
@@ -63,16 +61,14 @@
                             <thead>
                                 <tr>
                                     <th class="bg-red-500">Coursename</th>
-                                    <th class="bg-red-500">Code</th>
                                     <th class="bg-red-500" v-for="(item, index) in practice[0].report" :key="index">
                                         {{ item.day }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="coursename in practice" :key="coursename.course_code">
+                                <tr v-for="coursename in practice" :key="coursename.id">
                                     <td class="pl-2">{{ coursename.coursename }}</td>
-                                    <td class="text-center">{{ coursename.course_code }}</td>
                                     <td v-for="reportItem in coursename.report" :key="reportItem.day"  :class="getBackgroundColorClass(reportItem.type)" style="width: 45px; height: 45px"></td>
                                 </tr>
                             </tbody>
@@ -128,7 +124,6 @@ const months = ref([
 const lecture = ref([ 
     {
         coursename: 'History and philosophy of science', 
-        course_code: 'SPS7001', 
         report: [
             { day: 2, type: 'absent' }, 
             { day: 9, type: 'card' },
@@ -142,7 +137,6 @@ const lecture = ref([
 const practice = ref([ 
     {
         coursename: 'History and philosophy of science', 
-        course_code: 'SPS7001', 
         report: [
             { day: 2, type: 'card' }, 
             { day: 9, type: 'card' },
