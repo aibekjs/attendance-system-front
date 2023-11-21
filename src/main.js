@@ -22,7 +22,8 @@ import {
   faAddressCard,
   faGear,
   faLockOpen,
-  faThumbsUp
+  faThumbsUp,
+  faCircleXmark
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -36,7 +37,8 @@ library.add(
   faAddressCard,
   faGear,
   faLockOpen,
-  faThumbsUp
+  faThumbsUp,
+  faCircleXmark
 );
 
 
@@ -44,6 +46,7 @@ import Ripple from "primevue/ripple";
 import StyleClass from "primevue/styleclass";
 import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 
 createApp(App)
   .use(router)
@@ -51,6 +54,7 @@ createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .component("Dropdown", Dropdown)
   .component("Button", Button)
+  .component("InputText", InputText)
   .directive("ripple", Ripple)
   .directive("styleclass", StyleClass)
   .mount("#app");

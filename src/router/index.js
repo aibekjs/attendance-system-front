@@ -12,6 +12,7 @@ import StudentDashboard from '../layouts/StudentDashboard.vue'
 import MyAttendanceReport from '../views/dashboard/student/MyAttendanceReport'
 import TeacherDashboard from '../layouts/TeacherDashboard.vue'
 import StudentAttendanceReport from '../views/dashboard/teacher/StudentAttendanceReport.vue'
+import FriendsPage from '../views/dashboard/Friends/FriendsPage.vue'
 
 const routes = [ 
   { 
@@ -35,6 +36,11 @@ const routes = [
         path: 'my-attendance-report', 
         name: 'my_attendance_report', 
         component: MyAttendanceReport, 
+      },
+      { 
+        path: 'friends-page', 
+        name: 'friends_page', 
+        component: FriendsPage, 
       }, 
     ],
   }, 

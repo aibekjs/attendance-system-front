@@ -19,13 +19,15 @@
                         </router-link>
                     </li>
                     <li>
-                        <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
-                            transition-duration-150 transition-colors p-ripple">
-                            <span class="text-center" style="width: 30px;">
-                                <font-awesome-icon :icon="['fas', 'user-group']" />
-                            </span>
-                            <span class="font-bold">Friends</span>
-                        </a>
+                        <router-link :to="{ path: '/student-dashboard/friends-page' }" class="no-underline">
+                            <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-red-900 border-round text-900 hover:text-white
+                                transition-duration-150 transition-colors p-ripple">
+                                <span class="text-center" style="width: 30px;">
+                                    <font-awesome-icon :icon="['fas', 'user-group']" />
+                                </span>
+                                <span class="font-bold">Friends</span>
+                            </a>
+                        </router-link>
                     </li>
                     <li>
                         <router-link :to="{ path: '/' }" class="no-underline">
