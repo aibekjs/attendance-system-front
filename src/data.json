@@ -1,0 +1,38 @@
+[ 
+    { 
+        "id": 3, 
+        "student_id": 38546, 
+        "type": "friend", 
+        "date": "2023-09-26", 
+        "course_id": "2", 
+        "lesson_type": 1, 
+        "created_at": "2023-11-16T09:31:20.000000Z", 
+        "updated_at": "2023-11-16T09:31:20.000000Z", 
+        "course": { 
+            "id": 2, 
+            "name": "Linux", 
+            "course_type": 2, 
+            "teacher_id": 2, 
+            "created_at": "2023-11-16T09:31:20.000000Z", 
+            "updated_at": "2023-11-16T09:31:20.000000Z" 
+        } 
+    }, 
+    { 
+        "id": 4, 
+        "student_id": 38546, 
+        "type": "card", 
+        "date": "2023-09-27", 
+        "course_id": "2", 
+        "lesson_type": 2, 
+        "created_at": "2023-11-16T09:31:20.000000Z", 
+        "updated_at": "2023-11-16T09:31:20.000000Z", 
+        "course": { 
+            "id": 2, 
+            "name": "Linux", 
+            "course_type": 2, 
+            "teacher_id": 2, 
+            "created_at": "2023-11-16T09:31:20.000000Z", 
+            "updated_at": "2023-11-16T09:31:20.000000Z" 
+        } 
+    } 
+]

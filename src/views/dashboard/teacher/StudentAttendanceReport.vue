@@ -4,11 +4,31 @@
             <div class="text-center font-bold">Attendance Report</div>
             <div class="bg-black-alpha-90 my-3" style="min-height: 0.5rem"></div>
             <div class="card flex justify-content-between">
-                <Dropdown v-model="selectedCourse" :options="courses" optionLabel="coursename" placeholder="Coursename" class="w-full md:w-14rem" />
-                <Dropdown v-model="selectedGroup" :options="groups" optionLabel="groupname" placeholder="Groupname" class="w-full md:w-14rem" />
-                <Dropdown v-model="selectedYear" :options="years" optionLabel="year" placeholder="Year" class="w-full md:w-14rem" />
-                <Dropdown v-model="selectedMonth" :options="months" optionLabel="month" placeholder="Month" class="w-full md:w-14rem" />
-                <Button type="button" label="Show" severity="danger" class="w-full md:w-14rem bg-red-700" />
+                <div class="flex flex-column">
+                    <label for="year" class="font-bold mb-1">Year</label>
+                    <select v-model="selectedYear"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                        <option class="text-lg" v-for="year in uniqueYears" :key="year" :value="year">{{ year }}</option>
+                    </select>
+                </div>
+                <div class="flex flex-column">
+                    <label for="month" class="font-bold mb-1">Month</label>
+                    <select v-model="selectedMonth"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                        <option class="text-lg" v-for="month in months" :key="month.value" :value="month.value">{{ month.label }}</option>
+                    </select>
+                </div>
+                <div class="flex flex-column">
+                    <label for="course" class="font-bold mb-1">Course</label>
+                    <select v-model="selectedCourse"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                        <option class="text-lg" v-for="course in uniqueCourses" :key="course" :value="course">{{ course }}</option>
+                    </select>
+                </div> 
+                <div class="flex flex-column">
+                    <label for="course" class="font-bold mb-1">Group</label>
+                    <select v-model="selectedGroup"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                        <option class="text-lg" v-for="group in uniqueGroups" :key="group" :value="group">{{ group }}</option>
+                    </select>
+                </div>
+                <Button @click="showTable" type="button" label="Show" severity="danger" class="w-full md:w-12rem bg-red-700" />
             </div>
         </div>
     </div>
@@ -33,7 +53,7 @@
                 </div>
             </div>
             <div class="bg-black-alpha-90 my-3" style="min-height: 0.5rem"></div>
-            <div class="grid">
+            <div v-if="selectedYear !== null && selectedMonth !== null && selectedCourse !== null && selectedGroup !== null" class="grid">
                 <div class="col-12 md:col-6">
                     <div class="font-bold text-2xl text-center">Lecture</div>
                     <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
@@ -41,17 +61,16 @@
                             <thead>
                                 <tr>
                                     <th class="bg-yellow-500">Student</th>
-                                    <th class="bg-yellow-500">ID</th>
-                                    <th class="bg-yellow-500" v-for="(item, index) in LectureStudents[0].report" :key="index">
-                                        {{ item.day }}
-                                    </th>
+                                    <th class="bg-yellow-500" v-for="cell in filteredLectures"  :key="cell.id">
+                                      <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
+                                      <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
+                                  </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="student in LectureStudents" :key="student.id">
-                                    <td class="pl-2">{{ student.student }}</td>
-                                    <td class="text-center">{{ student.id }}</td>
-                                    <td v-for="reportItem in student.report" :key="reportItem.day" :class="getBackgroundColorClass(reportItem.type)" style="width: 45px; height: 45px"></td>
+                                <tr>
+                                    <td class="pl-2"> {{ filteredLectures.length > 0 ? filteredLectures[0].users.name : 'Student' }} </td>
+                                    <td v-for="cell in filteredLectures" :key="cell.id" :class="getBackgroundColorClass(cell.type)" style="width: 45px; height: 45px"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -64,17 +83,16 @@
                             <thead>
                                 <tr>
                                     <th class="bg-red-500">Student</th>
-                                    <th class="bg-red-500">ID</th>
-                                    <th class="bg-red-500" v-for="(item, index) in PracticeStudents[0].report" :key="index">
-                                        {{ item.day }}
+                                    <th class="bg-red-500" v-for="cell in filteredPractices"  :key="cell.id">
+                                      <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
+                                      <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="student in PracticeStudents" :key="student.id">
-                                    <td class="pl-2">{{ student.student }}</td>
-                                    <td class="text-center">{{ student.id }}</td>
-                                    <td v-for="reportItem in student.report" :key="reportItem.day"  :class="getBackgroundColorClass(reportItem.type)" style="width: 45px; height: 45px"></td>
+                                <tr >
+                                    <td class="pl-2"> {{ filteredPractices.length > 0 ? filteredPractices[0].users.name : 'Student' }} </td>
+                                    <td v-for="cell in filteredPractices" :key="cell.id"  :class="getBackgroundColorClass(cell.type)" style="width: 45px; height: 45px"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -89,110 +107,110 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from 'vue';
+import axios from 'axios';
 
-const selectedCourse = ref();
-const courses = ref([ 
-    {coursename: 'History and philosophy of science'},
-    {coursename: 'High School of Pedagogy'},
-    {coursename: 'Research Methodology'},
-    {coursename: 'Software Development Management and Reengineering'},
-    {coursename: 'Advanced Programming'},
-    {coursename: 'Theory and Technology of Blockchain'},
-    {coursename: 'Geographic Information Systems'},
+const table = ref([]);
+/*
+// Import local data
+import localData from '@/data.json';
+
+// Set the local data to the table
+table.value = localData;
+*/
+
+const showTable = async () => {
+  try {
+    // Fetch data based on selected filters
+    const response = await axios.get("http://172.16.4.46:8000/api/getAttendanceForTeacher/");
+    console.log(response);
+    // Update the table with the fetched data
+    table.value = response.data;
+  } catch (e) {
+    alert('Error');
+  }
+};
+
+/*
+onMounted(async () => {
+  try {
+    const response = await axios.get("http://172.16.4.46:8000/api/getAttendanceForTeacher/");
+    console.log(response);
+    table.value = response.data;
+  } catch (e) {
+    alert('Error');
+  }
+});
+*/
+const selectedYear = ref(null);
+const selectedMonth = ref(null);
+const selectedCourse = ref(null);
+const selectedGroup = ref(null);
+
+const filteredLectures = computed(() => {
+return table.value.filter((cell) => {
+  return (
+    (!selectedYear.value || new Date(cell.date).getFullYear() == selectedYear.value) &&
+    (!selectedMonth.value || new Date(cell.date).getMonth() + 1 == selectedMonth.value) &&
+    (!selectedCourse.value || cell.course.name == selectedCourse.value) &&
+    (cell.lesson_type === 1) &&
+    (!selectedGroup.value || cell.group.name == selectedGroup.value)
+  );
+});
+});
+
+const filteredPractices = computed(() => {
+return table.value.filter((cell) => {
+  return (
+    (!selectedYear.value || new Date(cell.date).getFullYear() == selectedYear.value) &&
+    (!selectedMonth.value || new Date(cell.date).getMonth() + 1 == selectedMonth.value) &&
+    (!selectedCourse.value || cell.course.name == selectedCourse.value) && 
+    (cell.lesson_type !== 1) &&
+    (!selectedGroup.value || cell.group.name == selectedGroup.value)
+  );
+});
+});
+
+const uniqueYears = computed(() => {
+return Array.from(new Set(table.value.map((cell) => new Date(cell.date).getFullYear())));
+});
+
+const months = computed(() => [
+{ label: 'January', value: 1 },
+{ label: 'February', value: 2 },
+{ label: 'March', value: 3 },
+{ label: 'April', value: 4 },
+{ label: 'May', value: 5 },
+{ label: 'June', value: 6 },
+{ label: 'July', value: 7 },
+{ label: 'August', value: 8 },
+{ label: 'September', value: 9 },
+{ label: 'October', value: 10 },
+{ label: 'November', value: 11 },
+{ label: 'December', value: 12 },
 ]);
 
-const selectedGroup = ref();
-const groups = ref([ 
-    {groupname: 'SE-231M'},
-    {groupname: 'SE-232M'},
-]);
+const uniqueCourses = computed(() => {
+return Array.from(new Set(table.value.map((cell) => cell.course.name)));
+});
 
-const selectedYear = ref();
-const years = ref([ 
-    {year: '2023'},
-    {year: '2024'},
-]);
-
-const selectedMonth = ref();
-const months = ref([ 
-    {month: 'January'},
-    {month: 'February'},
-    {month: 'March'},
-    {month: 'April'},
-    {month: 'May'},
-    {month: 'June'},
-    {month: 'July'},
-    {month: 'August'},
-    {month: 'September'},
-    {month: 'October'},
-    {month: 'November'},
-    {month: 'December'},
-]);
-
-const LectureStudents = ref([ 
-    {
-        student: 'Serikbay Aibek', 
-        id: 38545, 
-        report: [
-            { day: 2, type: 'absent' }, 
-            { day: 9, type: 'card' },
-            { day: 16, type: 'card' },
-            { day: 21, type: 'friend' },
-            { day: 28, type: 'code' }
-        ]
-    },
-    {
-        student: 'Talgatov Duman', 
-        id: 38547, 
-        report: [
-            { day: 2, type: 'card' }, 
-            { day: 9, type: 'card' },
-            { day: 16, type: 'card' },
-            { day: 21, type: 'absent' },
-            { day: 28, type: 'friend' }
-        ]
-    },
-]);
-
-const PracticeStudents = ref([ 
-    {
-        student: 'Serikbay Aibek', 
-        id: 38545, 
-        report: [
-            { day: 2, type: 'card' }, 
-            { day: 9, type: 'card' },
-            { day: 16, type: 'absent' },
-            { day: 21, type: 'card' },
-            { day: 28, type: 'card' },
-        ]
-    },
-    {
-        student: 'Talgatov Duman', 
-        id: 38547, 
-        report: [
-            { day: 2, type: 'code' }, 
-            { day: 9, type: 'code' },
-            { day: 16, type: 'card' },
-            { day: 21, type: 'friend' },
-            { day: 28, type: 'card' },
-        ]
-    },
-]);
+const uniqueGroups = computed(() => {
+return Array.from(new Set(table.value.map((cell) => cell.group.name)));
+});
 
 const getBackgroundColorClass = (type) => {
-  switch (type) {
-    case 'card':
-      return 'bg-green-700';
-    case 'code':
-      return 'bg-blue-700';
-    case 'friend':
-      return 'bg-pink-700';
-    case 'absent':
-      return 'bg-black-alpha-90';
-    default:
-      return '';
-  }
+switch (type) {
+  case 'card':
+    return 'bg-green-700';
+  case 'code':
+    return 'bg-blue-700';
+  case 'friend':
+    return 'bg-pink-700';
+  case 'absent':
+    return 'bg-black-alpha-90';
+  default:
+    return '';
+}
 };
 </script>
 

@@ -105,18 +105,26 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 
 const table = ref([]);
+/*
+// Import local data
+import localData from '@/data.json';
+
+// Set the local data to the table
+table.value = localData;
+*/
 
 const showTable = async () => {
-try {
-  // Fetch data based on selected filters
-  const response = await axios.get("http://192.168.20.94:8000/api/getAttendanceForStudent/");
-  console.log(response);
-  // Update the table with the fetched data
-  table.value = response.data;
-} catch (e) {
-  alert('Error');
-}
+  try {
+    // Fetch data based on selected filters
+    const response = await axios.get("http://172.16.4.46:8000/api/getAttendanceForStudent/");
+    console.log(response);
+    // Update the table with the fetched data
+    table.value = response.data;
+  } catch (e) {
+    alert('Error');
+  }
 };
+
 
 const selectedYear = ref(null);
 const selectedMonth = ref(13);
