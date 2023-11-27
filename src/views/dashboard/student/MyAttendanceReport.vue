@@ -22,7 +22,6 @@
                       <option class="text-lg" v-for="course in uniqueCourses" :key="course" :value="course">{{ course }}</option>
                   </select>
               </div>
-              <Button @click="showTable" type="button" label="Show" severity="danger" class="w-full md:w-17rem bg-red-700" />
           </div>
       </div>
   </div>
@@ -30,7 +29,7 @@
       <div class="surface-card border-round border-round-3xl p-4">
           <div class="bg-pink-300 w-4 m-auto p-2 flex justify-content-between">
               <div class="flex align-items-center">
-                  <div class="bg-green-700" style="width: 25px; height: 25px"></div> 
+                  <div class="bg-red-700" style="width: 25px; height: 25px"></div> 
                   <div class="font-bold ml-1">Card</div>
               </div>
               <div class="flex align-items-center">
@@ -38,7 +37,7 @@
                   <div class="font-bold ml-1">Code</div>
               </div>
               <div class="flex align-items-center">
-                  <div class="bg-pink-700" style="width: 25px; height: 25px"></div> 
+                  <div class="bg-yellow" style="width: 25px; height: 25px"></div> 
                   <div class="font-bold ml-1">Friend</div>
               </div>
               <div class="flex align-items-center">
@@ -47,61 +46,52 @@
               </div>
           </div>
           <div class="bg-black-alpha-90 my-3" style="min-height: 0.5rem"></div>
-          <div v-if="selectedYear !== null && selectedMonth !== null && selectedCourse !== null" class="grid">
-              <div class="col-12 md:col-6">
-                  <div class="font-bold text-2xl text-center">Lecture</div>
-                  <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
-                      <table class="w-full">
-                          <thead>
-                              <tr>
-                                  <th class="bg-yellow-500">Coursename</th>
-                                  <th class="bg-yellow-500" v-for="cell in filteredLectures"  :key="cell.id">
-                                      <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
-                                      <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
-                                  </th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td class="pl-2"> {{ filteredLectures.length > 0 ? filteredLectures[0].course.name : 'Course' }} </td>
-                                  <td v-for="cell in filteredLectures" :key="cell.id" :class="getBackgroundColorClass(cell.type)" style="width: 45px; height: 45px"></td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
+          <div  class="grid">
+              <div class="col-12">
+                <div class="font-bold text-2xl mb-3">Lecture</div>
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                        <th>Course</th>
+                        <th v-for="day in getDaysInMonth(selectedYear, selectedMonth)" :key="day">
+                            {{ day }}
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pl-2"> {{ filteredLectures.length > 0 ? filteredLectures[0].course.name : 'Course' }} </td>
+                            <td v-for="day in getDaysInMonth(selectedYear, selectedMonth)" :key="day" :class="getBackgroundColorClassForDate(day, filteredLectures)" style="width: 30px; height: 30px"></td>
+                        </tr>
+                    </tbody>
+                </table>
               </div>
-              <div class="col-12 md:col-6">
-                  <div class="font-bold text-2xl text-center">Practice</div>
-                  <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
-                      <table class="w-full">
-                          <thead>
-                              <tr>
-                                  <th class="bg-red-500">Coursename</th>
-                                  <th class="bg-red-500" v-for="cell in filteredPractices"  :key="cell.id">
-                                      <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
-                                      <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
-                                  </th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td class="pl-2"> {{ filteredPractices.length > 0 ? filteredPractices[0].course.name : 'Course' }} </td>
-                                  <td v-for="cell in filteredPractices" :key="cell.id"  :class="getBackgroundColorClass(cell.type)" style="width: 45px; height: 45px"></td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
+              <div class="col-12">
+                <div class="font-bold text-2xl mb-3">Practice</div>
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                        <th>Course</th>
+                        <th v-for="day in getDaysInMonth(selectedYear, selectedMonth)" :key="day">
+                            {{ day }}
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pl-2"> {{ filteredPractices.length > 0 ? filteredPractices[0].course.name : 'Course' }} </td>
+                            <td v-for="day in getDaysInMonth(selectedYear, selectedMonth)" :key="day" :class="getBackgroundColorClassForDate(day, filteredPractices)" style="width: 30px; height: 30px"></td>
+                        </tr>
+                    </tbody>
+                </table>
               </div>
-          </div>
-          <div class="w-full text-center">
-              <Button type="button" label="Download" icon="pi pi-download" severity="help" class="bg-pink-300 text-900" />
           </div>
       </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
 const table = ref([]);
@@ -113,10 +103,10 @@ import localData from '@/data.json';
 table.value = localData;
 */
 
-const showTable = async () => {
+const fetchTable = async () => {
   try {
     // Fetch data based on selected filters
-    const response = await axios.get("http://172.16.4.46:8000/api/getAttendanceForStudent/");
+    const response = await axios.get("http://attendancesystemback-env.eba-nmg2muhp.us-east-1.elasticbeanstalk.com/api/getAttendanceForStudent");
     console.log(response);
     // Update the table with the fetched data
     table.value = response.data;
@@ -125,9 +115,12 @@ const showTable = async () => {
   }
 };
 
+onMounted(() => {
+    fetchTable();
+});
 
 const selectedYear = ref(null);
-const selectedMonth = ref(13);
+const selectedMonth = ref(null);
 const selectedCourse = ref(null);
 
 const filteredLectures = computed(() => {
@@ -175,30 +168,37 @@ const uniqueCourses = computed(() => {
 return Array.from(new Set(table.value.map((cell) => cell.course.name)));
 });
 
+const getDaysInMonth = (year, month) => {
+  const daysInMonth = new Date(year, month, 0).getDate();
+  return Array.from({ length: daysInMonth }, (_, i) => i + 1);
+};
+
 const getBackgroundColorClass = (type) => {
-switch (type) {
-  case 'card':
-    return 'bg-green-700';
-  case 'code':
-    return 'bg-blue-700';
-  case 'friend':
-    return 'bg-pink-700';
-  case 'absent':
-    return 'bg-black-alpha-90';
-  default:
-    return '';
-}
+    switch (type) {
+    case 'card':
+        return 'bg-red-700';
+    case 'code':
+        return 'bg-blue-700';
+    case 'friend':
+        return 'bg-yellow';
+    case 'absent':
+        return 'bg-black-alpha-90';
+    default:
+        return '';
+    }
+};
+
+const getBackgroundColorClassForDate = (day, filteredData) => {const dataForDay = filteredData.find((cell) => {
+    const cellDay = new Date(cell.date).getDate();
+    return cellDay === day;
+  });
+
+  return dataForDay ? getBackgroundColorClass(dataForDay.type) : '';
 };
 </script>
 
 <style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-.color-box {
-width: 25px;
-height: 25px;
-margin: 0 auto;
+.bg-yellow {
+    background: #FFF500E8;
 }
 </style>
