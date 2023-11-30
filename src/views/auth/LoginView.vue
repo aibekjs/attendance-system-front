@@ -84,14 +84,19 @@ export default {
 
       if (!this.passwordError && !this.usernameRequired) {
         try {
-          const response = await axios.post('http://172.16.4.81:8000/api/login', {
+          const response = await axios.post('http://attendancesystemback-env.eba-nmg2muhp.us-east-1.elasticbeanstalk.com/api/login', {
             email: this.username,
             password: this.password
           });
           
           if (response.data.status === 200) {
             console.log(response.data.access_token);
-            this.$router.push({ path: 'student-dashboard/my-attendance-report' });
+
+            if (response.data.user.role === 3) {
+              this.$router.push({ path: 'student-dashboard/my-attendance-report' });
+            } else {
+              this.$router.push({ path: 'teacher-dashboard/student-attendance-report' });
+            }
           }
         } catch (error) {
           console.error(error.email);

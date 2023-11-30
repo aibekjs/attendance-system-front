@@ -33,8 +33,13 @@ export default {
 
       if (this.id) {
         try {
+          const currentDate = new Date();
+          const formattedDate = currentDate.toISOString();
+          
           const response = await axios.post('http://attendancesystemback-env.eba-nmg2muhp.us-east-1.elasticbeanstalk.com/api/loginByCard', {
             student_id: this.id,
+            datetime: formattedDate,
+            machine_id: 63,
           });
   
           if (response.data.status === 200) {
@@ -47,7 +52,7 @@ export default {
       } else {
         this.idError = 'ID is required!';
       }
-    }
+    },
   },
 };
 </script>

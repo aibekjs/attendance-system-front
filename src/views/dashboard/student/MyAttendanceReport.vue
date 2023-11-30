@@ -47,7 +47,7 @@
               </div> 
           </div> 
           <div class="bg-black-alpha-90 my-3" style="min-height: 0.5rem"></div> 
-          <div  class="grid" v-if="selectedYear !== null && selectedMonth !== null "> 
+          <div  class="grid" v-if="selectedYear !== null && selectedMonth !== null"> 
             <div class="col-12"> 
                 <div class="font-bold text-2xl mb-3">Lecture</div> 
                 <table class="w-full"> 
@@ -120,21 +120,21 @@ const fetchTable = async () => {
   } 
 }; 
  
-const filteredCourses = (filteredData) => { 
-  return Array.from(new Set(filteredData.map((cell) => cell.course.name))); 
-}; 
 onMounted(() => { 
     fetchTable(); 
 }); 
- 
+
 const selectedYear = ref(null); 
 const selectedMonth = ref(null); 
 const selectedCourse = ref(null); 
- 
+
+const filteredCourses = (filteredData) => { 
+  return Array.from(new Set(filteredData.map((cell) => cell.course.name))); 
+}; 
+
 watchEffect(() => { 
  (selectedCourse.value === null)  
 }); 
- 
  
 const filteredLectures = computed(() => { 
   return table.value.filter((cell) => { 

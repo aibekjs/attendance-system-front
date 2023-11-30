@@ -58,6 +58,6 @@
 import { ref } from "vue";
 
 const username = ref([ 
-    {photo: 'https://frankfurt.apollo.olxcdn.com/v1/files/r3xsf4z97vnv3-KZ/image;s=1080x1071', name: 'Maratuly Kadyr'},
+    {photo: 'https://blog-pixomatic.s3.appcnt.com/image/22/01/26/61f166e1e3b25/_orig/pixomatic_1572877090227.png', name: 'Mr Denis'},
 ]);
 </script>
