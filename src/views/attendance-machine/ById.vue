@@ -33,7 +33,7 @@ export default {
 
       if (this.id) {
         try {
-          const response = await axios.post('http://172.16.4.81:8000/api/loginByCard', {
+          const response = await axios.post('http://attendancesystemback-env.eba-nmg2muhp.us-east-1.elasticbeanstalk.com/api/loginByCard', {
             student_id: this.id,
           });
   

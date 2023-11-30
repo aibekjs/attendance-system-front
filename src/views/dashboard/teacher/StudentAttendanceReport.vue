@@ -6,29 +6,22 @@
             <div class="card flex justify-content-between">
                 <div class="flex flex-column">
                     <label for="year" class="font-bold mb-1">Year</label>
-                    <select v-model="selectedYear"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                    <select v-model="selectedYear"  class="w-full md:w-17rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
                         <option class="text-lg" v-for="year in uniqueYears" :key="year" :value="year">{{ year }}</option>
                     </select>
                 </div>
                 <div class="flex flex-column">
                     <label for="month" class="font-bold mb-1">Month</label>
-                    <select v-model="selectedMonth"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                    <select v-model="selectedMonth"  class="w-full md:w-17rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
                         <option class="text-lg" v-for="month in months" :key="month.value" :value="month.value">{{ month.label }}</option>
                     </select>
                 </div>
                 <div class="flex flex-column">
                     <label for="course" class="font-bold mb-1">Course</label>
-                    <select v-model="selectedCourse"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
+                    <select v-model="selectedCourse"  class="w-full md:w-17rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
                         <option class="text-lg" v-for="course in uniqueCourses" :key="course" :value="course">{{ course }}</option>
                     </select>
                 </div> 
-                <div class="flex flex-column">
-                    <label for="course" class="font-bold mb-1">Group</label>
-                    <select v-model="selectedGroup"  class="w-full md:w-12rem p-2 bg-pink-300 border-0 outline-none text-lg cursor-pointer">
-                        <option class="text-lg" v-for="group in uniqueGroups" :key="group" :value="group">{{ group }}</option>
-                    </select>
-                </div>
-                <Button @click="showTable" type="button" label="Show" severity="danger" class="w-full md:w-12rem bg-red-700" />
             </div>
         </div>
     </div>
@@ -53,61 +46,54 @@
                 </div>
             </div>
             <div class="bg-black-alpha-90 my-3" style="min-height: 0.5rem"></div>
-            <div v-if="selectedYear !== null && selectedMonth !== null && selectedCourse !== null && selectedGroup !== null" class="grid">
-                <div class="col-12 md:col-6">
-                    <div class="font-bold text-2xl text-center">Lecture</div>
-                    <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
-                        <table class="w-full">
-                            <thead>
-                                <tr>
-                                    <th class="bg-yellow-500">Student</th>
-                                    <th class="bg-yellow-500" v-for="cell in filteredLectures"  :key="cell.id">
-                                      <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
-                                      <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="font-bold text-2xl mb-3">Lecture</div>
+                      <table class="w-full">
+                          <thead>
+                              <tr>
+                                  <th>Student</th>
+                                  <th v-for="cell in filteredLectures"  :key="cell.id">
+                                    <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
+                                    <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
+                                </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="pl-2"> {{ filteredLectures.length > 0 ? filteredLectures[0].users.name : 'Student' }} </td>
+                                  <td v-for="cell in filteredLectures" :key="cell.id" :class="getBackgroundColorClass(cell.type)" style="width: 30px; height: 30px"></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                </div>
+                <div class="col-12">
+                    <div class="font-bold text-2xl mb-3">Practice</div>
+                      <table class="w-full">
+                          <thead>
+                              <tr>
+                                  <th>Student</th>
+                                  <th v-for="cell in filteredPractices"  :key="cell.id">
+                                    <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
+                                    <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
                                   </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="pl-2"> {{ filteredLectures.length > 0 ? filteredLectures[0].users.name : 'Student' }} </td>
-                                    <td v-for="cell in filteredLectures" :key="cell.id" :class="getBackgroundColorClass(cell.type)" style="width: 45px; height: 45px"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="pl-2"> {{ filteredPractices.length > 0 ? filteredPractices[0].users.name : 'Student' }} </td>
+                                  <td v-for="cell in filteredPractices" :key="cell.id"  :class="getBackgroundColorClass(cell.type)" style="width: 30px; height: 30px"></td>
+                              </tr>
+                          </tbody>
+                      </table>
                 </div>
-                <div class="col-12 md:col-6">
-                    <div class="font-bold text-2xl text-center">Practice</div>
-                    <div class="bg-pink-300 border-round border-round-3xl m-4 p-4">
-                        <table class="w-full">
-                            <thead>
-                                <tr>
-                                    <th class="bg-red-500">Student</th>
-                                    <th class="bg-red-500" v-for="cell in filteredPractices"  :key="cell.id">
-                                      <p v-if="cell.date[8] === '0'">{{ cell.date[9] }}</p>
-                                      <p v-else>{{ cell.date[8] + cell.date[9] }}</p>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr >
-                                    <td class="pl-2"> {{ filteredPractices.length > 0 ? filteredPractices[0].users.name : 'Student' }} </td>
-                                    <td v-for="cell in filteredPractices" :key="cell.id"  :class="getBackgroundColorClass(cell.type)" style="width: 45px; height: 45px"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full text-center">
-                <Button type="button" label="Download" icon="pi pi-download" severity="help" class="bg-pink-300 text-900" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
 const table = ref([]);
@@ -119,10 +105,10 @@ import localData from '@/data.json';
 table.value = localData;
 */
 
-const showTable = async () => {
+const fetchTable = async () => {
   try {
     // Fetch data based on selected filters
-    const response = await axios.get("http://172.16.4.46:8000/api/getAttendanceForTeacher/");
+    const response = await axios.get("http://attendancesystemback-env.eba-nmg2muhp.us-east-1.elasticbeanstalk.com/api/getAttendanceForTeacher/");
     console.log(response);
     // Update the table with the fetched data
     table.value = response.data;
@@ -130,6 +116,10 @@ const showTable = async () => {
     alert('Error');
   }
 };
+
+onMounted(() => { 
+    fetchTable(); 
+}); 
 
 /*
 onMounted(async () => {
@@ -145,7 +135,6 @@ onMounted(async () => {
 const selectedYear = ref(null);
 const selectedMonth = ref(null);
 const selectedCourse = ref(null);
-const selectedGroup = ref(null);
 
 const filteredLectures = computed(() => {
 return table.value.filter((cell) => {
@@ -153,8 +142,7 @@ return table.value.filter((cell) => {
     (!selectedYear.value || new Date(cell.date).getFullYear() == selectedYear.value) &&
     (!selectedMonth.value || new Date(cell.date).getMonth() + 1 == selectedMonth.value) &&
     (!selectedCourse.value || cell.course.name == selectedCourse.value) &&
-    (cell.lesson_type === 1) &&
-    (!selectedGroup.value || cell.group.name == selectedGroup.value)
+    (cell.lesson_type === 1) 
   );
 });
 });
@@ -165,8 +153,7 @@ return table.value.filter((cell) => {
     (!selectedYear.value || new Date(cell.date).getFullYear() == selectedYear.value) &&
     (!selectedMonth.value || new Date(cell.date).getMonth() + 1 == selectedMonth.value) &&
     (!selectedCourse.value || cell.course.name == selectedCourse.value) && 
-    (cell.lesson_type !== 1) &&
-    (!selectedGroup.value || cell.group.name == selectedGroup.value)
+    (cell.lesson_type !== 1)
   );
 });
 });
@@ -194,9 +181,7 @@ const uniqueCourses = computed(() => {
 return Array.from(new Set(table.value.map((cell) => cell.course.name)));
 });
 
-const uniqueGroups = computed(() => {
-return Array.from(new Set(table.value.map((cell) => cell.group.name)));
-});
+
 
 const getBackgroundColorClass = (type) => {
 switch (type) {

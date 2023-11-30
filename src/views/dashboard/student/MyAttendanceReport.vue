@@ -96,7 +96,7 @@
 </template> 
  
 <script setup> 
-import { ref, computed, onMounted,watchEffect } from 'vue'; 
+import { ref, computed, onMounted, watchEffect } from 'vue'; 
 import axios from 'axios'; 
  
 const table = ref([]); 
