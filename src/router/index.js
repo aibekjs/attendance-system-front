@@ -13,6 +13,7 @@ import MyAttendanceReport from '../views/dashboard/student/MyAttendanceReport'
 import TeacherDashboard from '../layouts/TeacherDashboard.vue'
 import StudentAttendanceReport from '../views/dashboard/teacher/StudentAttendanceReport.vue'
 import FriendsPage from '../views/dashboard/Friends/FriendsPage.vue'
+import CantAttend from '../views/dashboard/Friends/CantAttend.vue'
 
 const routes = [ 
   { 
@@ -42,6 +43,11 @@ const routes = [
         name: 'friends_page', 
         component: FriendsPage, 
       }, 
+      {
+        path: 'cant-attend', 
+        name: 'cant_attend', 
+        component: CantAttend, 
+      },
     ],
   }, 
   { 
