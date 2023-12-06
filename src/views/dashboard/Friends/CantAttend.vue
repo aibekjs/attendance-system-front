@@ -40,10 +40,16 @@
             <hr class="my-3">
             <div class="center-div bg-pink-200 py-6 w-3 flex justify-content-evenly">
                 <Button label="Back" severity="danger" />
-                <Button label="Send" severity="info" />
+                <Button label="Send" severity="info" @click="showCenteredDiv" />
             </div>
         </div> 
     </div> 
+    <div v-if="isCenteredDivOpen" class="overlay">
+      <div class="centered-div">
+          {{ message }} 
+          <font-awesome-icon :icon="['fas', 'circle-xmark']" @click="closeCenteredDiv" class="cursor-pointer" />
+      </div>
+    </div>
 </template>
 
 <script>
@@ -51,9 +57,24 @@ export default {
   data() {
     return {
       selectedReason: '',
-      email: ''
+      email: '',
+      isCenteredDivOpen: false,
+      message: ''
     };
   },
+  methods: {
+    showCenteredDiv() {
+      if (this.selectedReason === 'forgot') {
+        this.message = 'Watch your email box';
+      } else {
+        this.message = 'Success';
+      }
+      this.isCenteredDivOpen = true;
+    },
+    closeCenteredDiv() {
+      this.isCenteredDivOpen = false;
+    }
+  }
 };
 </script>
 
@@ -65,5 +86,24 @@ export default {
 .center-div {
   margin: 0 auto; 
   border-radius: 10px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.centered-div {
+  background-color: #fbb6ce; 
+  padding: 25px 50px;
+  border-radius: 8px;
+  z-index: 1000; 
+  font-size: 24px;
 }
 </style>

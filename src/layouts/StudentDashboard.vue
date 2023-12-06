@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="min-h-screen flex flex-column relative flex-auto">
+    <div class="min-h-screen flex flex-column relative flex-auto background-container">
         <div class="flex justify-content-between align-items-center px-5 relative lg:static" style="height:60px">
             <div class="flex">
                 <a v-ripple class="cursor-pointer block lg:hidden text-700 mr-3 mt-1 p-ripple"
@@ -83,3 +83,9 @@ const username = ref([
     {photo: 'https://frankfurt.apollo.olxcdn.com/v1/files/r3xsf4z97vnv3-KZ/image;s=1080x1071', name: 'Talgatov Duman'},
 ]);
 </script>
+
+<style>
+/* .background-container {
+  background: url('~@/assets/background.png');
+} */
+</style>
